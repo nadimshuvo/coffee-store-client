@@ -1,4 +1,24 @@
 const AddCoffee = () => {
+  const handleAddCoffee = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const newCoffee = Object.fromEntries(formData.entries());
+    console.log(newCoffee);
+
+    // send data to server - 5
+    fetch("http://localhost:3000/coffees", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newCoffee),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("After Adding Coffee", data);
+      });
+  };
   return (
     <aside className="p-24 text-center space-y-4">
       <h1 className="font-bold text-5xl text-amber-500">Add Coffee</h1>
@@ -9,7 +29,7 @@ const AddCoffee = () => {
         customize it by adding milk, sugar, syrups, or spices like cinnamon
       </p>
 
-      <form className="mt-16">
+      <form onSubmit={handleAddCoffee} className="mt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label">Name</label>
@@ -21,12 +41,12 @@ const AddCoffee = () => {
             />
           </fieldset>
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label">Chef</label>
+            <label className="label">Quantity</label>
             <input
               type="text"
-              name="chef"
+              name="quantity"
               className="input w-full"
-              placeholder="Chef Name"
+              placeholder="Quantity Name"
             />
           </fieldset>
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
