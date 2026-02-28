@@ -4,7 +4,9 @@ import "./index.css";
 
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
+import AddCoffee from "./components/AddCoffee";
 import Home from "./components/Home";
+import UpdateCoffee from "./components/UpdateCoffee";
 import MainLayout from "./layouts/MainLayout";
 
 const router = createBrowserRouter([
@@ -15,6 +17,14 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "addCoffee",
+        Component: AddCoffee,
+      },
+      {
+        path: "updateCoffee",
+        Component: UpdateCoffee,
       },
     ],
   },
